@@ -220,7 +220,11 @@ export default class Rabbit extends EventEmitter {
   }
 
   async close() {
-    await this.consumeConnection.close();
-    await this.publishConnection.close();
+    if (this.consumeConnection !== undefined) {
+      await this.consumeConnection.close();
+    }
+    if (this.publishConnection !== undefined) {
+      await this.publishConnection.close();
+    }
   }
 }
